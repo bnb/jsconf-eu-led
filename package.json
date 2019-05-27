@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "zip -q -r deploy.zip *",
+    "deploy": "az functionapp deployment source config-zip --subscription \"<your subscription here>\" --resource-group \"<your resource group here>\" -n \"<your function app name here>\" --src ./deploy.zip",
+    "postdeploy": "rm ./deploy.zip"
   },
   "keywords": [],
   "author": "Tierney Cyren <hello@bnb.im>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "rvl-node-animations": "^1.0.1"
+  }
 }
