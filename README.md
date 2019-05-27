@@ -23,7 +23,7 @@ Here are various the key things you'll want to know about if you're interested i
   - The Functions as a Service (a.k.a. Serverless) tool available from Azure
   - Check out [Creating and Deploying Azure Functions][creating-and-deploying-azure-functions] for more information on getting started!
 - [rvl-node-animations][rvl-node-animations-npm]
-  - The module by [Bryan Huges][nebrius-twitter] that makes the interface for controlling lights in the LED build significantly more simple than hardcoding LED patterns.
+  - The module by [Bryan Hughes][nebrius-twitter] that makes the interface for controlling lights in the LED build significantly more simple than hardcoding LED patterns.
   - Can be installed via `npm i rvl-node-animations`.
 - [Submissions][submit-and-queue]
   - The page where you can submit your Azure Functions for the LED Build
