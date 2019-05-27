@@ -128,18 +128,20 @@ Once you've got the CLI and extensions installed, you'll need to sign in to Azur
 
 Additionally, you can open up the Azure Functions sidebar and click "Sign in to Azure..." to sign in. To get the sidebar to appear you may need to restart VS Code.
 
+Once installed and signed in, you should be ready to start running and deploying functions!
+
 #### Local Development
 
 In VS Code, you have two options for local Function development:
 
 - `func start` uses the Azure Functions Core Tools CLI, and is an easy way to kick off your functions from the integrated terminal inside of VS Code. Ensure the current working directory is the directory your functions are in.
-- Pressing the `F5` key automatically runs your functions.
+- Pressing the `F5` key inside of VS Code automatically runs your functions, since you have the Azure Functions extension.
 
 Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
 
 #### Setting up the Cloud and Deploying Functions
 
-With the `jsconf-eu-led` directory open and your functions set up inside of the directory
+With this directory open, you're going to want to start the function (Run `func start` in your terminal or press`F5`)
 
 #### Installing the Tools
 
