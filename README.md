@@ -6,10 +6,7 @@ In this guide, we're going to go over the various parts you'll need to know (and
 
 ## Table of Contents
 
-- Overview
-- [Creating and Deploying Azure Functions][creating-and-deploying-azure-functions]
-- Submitting Your Functions
-- Credits
+- <TBD>
 
 ## Overview
 
@@ -34,56 +31,65 @@ Since this project relies on Azure, you'll need an Azure account. If you don't a
 
 Additionally, we're going to be working from a directory that I recommend you create now: `jsconf-eu-led`. Most, if not all, work we do will be within this directory. Of course this isn't a requirement for all functions, but for the purpose of this guide it makes sense 😇
 
-## Creating and Deploying Azure Functions
+## Auzre Functions In This Repository
 
-Let's dig into creating and deploying functions in three ways: via the CLIs, via VS Code, and via the Azure Portal.
+This repository contains a starter function that will work with the in-person demo that we'll have at JSConf EU. With some customization from you, you should be able to get you own color visualization up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
 
-### Creating and Deploying Functions Using Azure CLIs
+Let's quickly dig into what's contained within this repo:
 
-If you're more of a CLI user than an IDE or Portal user, you can use two CLIs – one for building and testing Functions locally, and one for deploying your functions up to Azure.
+- `./LEDTrigger/` is a directory that contains all the setup needed for an Auzre Function, mostly contained within `function.json`, and JavaScript that we want to run as a part of our Function.
+- `host.json` is a simple config file that tells Azure Functions how to configure itself.
+- `package.json` is our JavaScript manifest that provides some details about our app to Azure Functions and exposes dependencies to npm as requirements for the project.
 
-If you encounter any problems or have questions about the CLIs, feel free to approach team members at the booth and we'll be happy to help you 😊
+To get the function set up, you'll want to run the following command:
 
-#### Installing the CLIs
+```bash
+npm install
+```
 
-The CLIs we're going to use are `func` and `az`:
+This will install our single direct dependency, [rvl-node-animations][rvl-node-animations-npm], which the Azure Function uses by default.
+
+From there, you're going to want to run your functions to test them and then deploy them to the cloud ☁️ to submit them!
+
+### The Tools You'll Need
+
+#### Working from the CLI
 
 - You can find install instructions for `func` [here](func-install-instructions), also known as azure-functions-core-tools.
 - You can find install instructions for `az` [here](az-install-instructions).
 
-#### Initializing this Functions Project and Creating a New Function
+#### Working from VS Code
 
-With `func`, you have a few initialization options available to you:
+For development in VS Code, you'll want both the Azure Functions Core Tools CLI, and the Azure Functions extension for VS Code. You can find instructions on how to get both set up for your environment, there's an excellent in the the [VS Code docs][install-vs-code-reqs].
 
-`func init [directory]`: Initializes the _current directory_ if you don't pass `[directory]`as a Functions app. If you do pass `[directory]`, a new directory named as whatever you pass `[directory]` will be created and initialized as a git repo.
+> If you have any questions about or issues with the getting the VS Code tools set up, feel free to ask anyone staffing the Microsoft booth – we'd be happy to help ✨
 
-Azure Functions support a suite of languages, including JavaScript and TypeScript... which is what we assume most, if not all, of you will use.
+Once you've got the CLI and extensions installed, you'll need to sign in to Azure. You can accomplish this by opening the Command Palette and typing `Azure: Sign In`:
 
-![An example of running `func init` to build out a Node.js + JavaScript Azure Function](./img/func-init.png)
+![Screenshot of the VS Code Command Palette displaying the `Azure: Sign in` option](img/azure-sign-in.png)
 
-It's worth noting that this creates a virtually empty `package.json`. You can safely run `npm init` again if you want to use the interactive CLI for generating a `package.json`, or `npm init -y` to automatically accept all defaults suggested by the interactive CLI.
+Additionally, you can open up the Azure Functions sidebar and click "Sign in to Azure..." to sign in. To get the sidebar to appear you may need to restart VS Code.
 
-`func new`: Scaffolds out a new Azure Function in the current directory. You will be prompted to select a template – for our purposes we're going to do an HTTP trigger (option `8`).
+### Developing Your LED Patterns with Azure Functions Locally
 
-![An example of running `func new` to scaffold out an Azure Function.](./img/func-new.png)
-
-There are a few flags you can pass to `func new` that may be of interest. You can pass `--name <function name>` will automatically skip the interactive name selection, and `--template "<trigger name>"` where you pass the name of the template (in our case, `HttpTrigger`) that you'd like to use.
-
-To scaffold our function out, we can run:
-
-```bash
-func new --name led-trigger --template "HttpTrigger"
-```
-
-A new directory called `led-trigger` will be created, in which you'll find `function.json` and `index.js` – the basic components for a JavaScript Azure Function.
-
-### Local Development
+#### Local Development from the CLI
 
 The `func start` command is available to you, allowing you to run your functions locally without the need to deploy them to the Cloud to test them.
 
 Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
 
-#### Setting up the Cloud and Deploying Functions
+#### Local Development from VS Code
+
+In VS Code, you have two options for local Function development:
+
+- `func start` uses the Azure Functions Core Tools CLI, and is an easy way to kick off your functions from the integrated terminal inside of VS Code. Ensure the current working directory is the directory your functions are in.
+- Pressing the `F5` key inside of VS Code automatically runs your functions, since you have the Azure Functions extension.
+
+Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
+
+## Deploying to the Cloud ☁️
+
+#### Building Infrastructure and Deploying from the CLI
 
 To deploy, you'll need the `az` CLI. Let's get the CLI set up + build out some Cloud infrastructure for you:
 
@@ -114,52 +120,30 @@ From there we're going to run a suite of commands to build out our cloud infrast
 - Finally, run: `func azure functionapp publish jsconfeu-led`
   - Here, we're using the `func` CLI to publish to a Function App called `jsconfeu-led`, which is what we named the Function App we created in the previous step.
 
-### Creating and Deploying Functions Using VS Code
+#### Building Infrastructure and Deploying from the CLI
 
-#### Installing the Tools
-
-For development in VS Code, you'll want both the Azure Functions Core Tools CLI, and the Azure Functions extension for VS Code. You can find instructions on how to get both set up for your environment, there's an excellent in the the [VS Code docs][install-vs-code-reqs].
-
-> If you have any questions about or issues with the getting the VS Code tools set up, feel free to ask anyone staffing the Microsoft booth – we'd be happy to help ✨
-
-Once you've got the CLI and extensions installed, you'll need to sign in to Azure. You can accomplish this by opening the Command Palette and typing `Azure: Sign In`:
-
-![Screenshot of the VS Code Command Palette displaying the `Azure: Sign in` option](img/azure-sign-in.png)
-
-Additionally, you can open up the Azure Functions sidebar and click "Sign in to Azure..." to sign in. To get the sidebar to appear you may need to restart VS Code.
-
-Once installed and signed in, you should be ready to start running and deploying functions!
-
-#### Local Development
-
-In VS Code, you have two options for local Function development:
-
-- `func start` uses the Azure Functions Core Tools CLI, and is an easy way to kick off your functions from the integrated terminal inside of VS Code. Ensure the current working directory is the directory your functions are in.
-- Pressing the `F5` key inside of VS Code automatically runs your functions, since you have the Azure Functions extension.
-
-Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
-
-#### Setting up the Cloud and Deploying Functions
-
-With this directory open, you're going to want to start the function (Run `func start` in your terminal or press`F5`)
-
-#### Installing the Tools
-
-### Creating and Deploying Functions Using the Azure Portal
-
-#### Local Development
-
-#### Setting up the Cloud and Deploying Functions
-
+With this directory open, you're going to want to start the function (Run `func start` in your terminal or press`F5`
 
 ## Submitting your Functions
 
 ## Credits
 
+- Bryan Hughes ([Twitter][nebrius-twitter], [GitHub][nebrius-github]) put a tremendous amount of time and effort into making this project a success. Without his work, this entire project would not exist. If you like it, you should take a moment to thank him 💜
+- Jan Schenk ([Twitter][jansche-twitter], [GitHub][jansche-github]) was an awesome help inside of Germany, working on setting up and configuring the IoT rig to work as expected once Bryan Hughes had sent it over.
+- Suz Hinton ([Twitter][noopkat-twitter], [GitHub][noopkat-github]) for working to support the team on the IoT project remotely in every way she could.
+- Tierney Cyren ([Twitter][bnb-twitter], [GitHub][bnb-github]) for working on the content within this repository.
+
 [creating-and-deploying-azure-functions]: #creating-and-deploying-azure-functions
 
 [azure-functions-docs]: https://aka.ms/jsconf-eu-guide-azure-functions-docs
 [nebrius-twitter]: https://twitter.com/nebrius
+[nebrius-github]: https://github.com/nebrius
+[jansche-twitter]: https://twitter.com/jansche
+[jansche-github]: https://github.com/jansche
+[noopkat-twitter]: https://twitter.com/noopkat
+[noopkat-github]: https://github.com/noopkat
+[bnb-twitter]: https://twitter.com/bitandbang
+[bnb-github]: https://github.com/bnb
 [submit-and-queue]: http://aka.ms/jsconfeu-led
 [func-install-instructions]: https://aka.ms/jsconf-eu-guide-func-install
 [az-install-instructions]: https://aka.ms/jsconf-eu-guide-az-install
