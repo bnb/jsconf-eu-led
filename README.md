@@ -120,7 +120,7 @@ From there we're going to run a suite of commands to build out our cloud infrast
 - Finally, run: `func azure functionapp publish jsconfeu-led`
   - Here, we're using the `func` CLI to publish to a Function App called `jsconfeu-led`, which is what we named the Function App we created in the previous step.
 
-#### Building Infrastructure and Deploying from the CLI
+#### Building Infrastructure and Deploying from VS Code
 
 With this directory open, you're going to want to start the function (Run `func start` in your terminal or press`F5`
 
