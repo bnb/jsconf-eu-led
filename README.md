@@ -177,6 +177,7 @@ Once you've built out your visualzation, you should submit it and have it be vis
 - Bryan Hughes ([Twitter][nebrius-twitter], [GitHub][nebrius-github]) put a tremendous amount of time and effort into making this project a success. Without his work, this entire project would not exist. If you like it, you should take a moment to thank him 💜
 - Jan Schenk ([Twitter][jansche-twitter], [GitHub][jansche-github]) was an awesome help inside of Germany, working on setting up and configuring the IoT rig to work as expected once Bryan Hughes had sent it over.
 - Tierney Cyren ([Twitter][bnb-twitter], [GitHub][bnb-github]) for working on the content within this repository.
+- The maintainers of [clone-deep](npm.im/clone-deep), [is-plain-object](npm.im/is-plain-object), [isobject](npm.im/isobject), [kind-of](npm.im/kind-of), and [shallow-clone](npm.im/shallow-clone) – which is the entire dependency tree introduced to our function via [rvl-node-animations](npm.im/rvl-node-animations).
 
 [creating-and-deploying-azure-functions]: #creating-and-deploying-azure-functions
 
