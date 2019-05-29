@@ -4,8 +4,16 @@ const {
   createColorCycleWave
 } = require('rvl-node-animations');
 
-// If you want to just submit different colors and patterns,
-// you only need to edit this call to createWaveParameters.
+/*
+
+If you want to just submit different colors and patterns,
+you only need to edit this call to createWaveParameters.
+
+To learn more about the API of rvl-node-animations, see:
+https://github.com/nebrius/rvl-node-animations
+
+*/
+
 const ledPatternThatWillRender = createWaveParameters(
   // Create a moving wave
   createMovingWave(180, 255, 8, 1),
