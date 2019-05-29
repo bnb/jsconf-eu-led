@@ -6,7 +6,7 @@ In this guide, we're going to go over the various parts you'll need to know (and
 
 ## Table of Contents
 
-- <TBD>
+- TBD
 
 ## Overview
 
@@ -153,7 +153,7 @@ If you'd like to watch a short video on taking these steps, check out the [exist
 
 Once you've built out your visualzation, you should submit it and have it be visualized with the in-person LED setup we've got!
 
-To **preview your Function** before submitting it:
+### Preview Your Functions
 
 - Navigate to the [simulator](https://brhughledstorage.z6.web.core.windows.net/simulator.html).
 - Get the URL of your Function.
@@ -163,9 +163,14 @@ To **preview your Function** before submitting it:
   - If you've defined an API key as an environment variable or hard coded it into your function, also enter that!
 - Click "Run"!
 
-To **submit your Function**:
+### Submit Your Functions
 
-
+- Head over to the [submission][submit-and-queue] site.
+- Put the URL of your Azure Function in the `Azure Function Endpoint` field.
+- Put your API key in the `API Key`, if you've set one up.
+- Put the name you want to be identified as in the queue in the `Display Name` field.
+- Submit!
+  - Your entry will be queued up and run. Once run, all the information you entered into the three fields is dropped from the queue and not stored/retained in any other way.
 
 ## Credits
 
