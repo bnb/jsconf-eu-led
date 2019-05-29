@@ -179,24 +179,22 @@ Once you've built out your visualzation, you should submit it and have it be vis
 - Tierney Cyren ([Twitter][bnb-twitter], [GitHub][bnb-github]) for working on the content within this repository.
 - The maintainers of [clone-deep](npm.im/clone-deep), [is-plain-object](npm.im/is-plain-object), [isobject](npm.im/isobject), [kind-of](npm.im/kind-of), and [shallow-clone](npm.im/shallow-clone) – which is the entire dependency tree introduced to our function via [rvl-node-animations](npm.im/rvl-node-animations).
 
-[creating-and-deploying-azure-functions]: #creating-and-deploying-azure-functions
+<!-- Azure Docs and other related links -->
+[submit-and-queue]: http://aka.ms/jsconfeu/led-custom
+[azure-functions-docs]: https://aka.ms/jsconfeu/azure-functions-docs
+[func-install-instructions]: https://aka.ms/jsconfeu/func-install
+[az-install-instructions]: https://aka.ms/jsconfeu/az-install
+[install-vs-code-reqs]: https://aka.ms/jsconfeu/install-vs-code-reqs
+[use-azure]: https://aka.ms/jsconfeu/free
+[regions]: https://aka.ms/jsconfeu/regions
 
-[azure-functions-docs]: https://aka.ms/jsconf-eu-guide-azure-functions-docs
+<!-- Social links in Credits and elsewhere -->
 [nebrius-twitter]: https://twitter.com/nebrius
 [nebrius-github]: https://github.com/nebrius
 [jansche-twitter]: https://twitter.com/jansche
 [jansche-github]: https://github.com/jansche
-[noopkat-twitter]: https://twitter.com/noopkat
-[noopkat-github]: https://github.com/noopkat
 [bnb-twitter]: https://twitter.com/bitandbang
 [bnb-github]: https://github.com/bnb
-[submit-and-queue]: http://aka.ms/jsconfeu-led
-[func-install-instructions]: https://aka.ms/jsconf-eu-guide-func-install
-[az-install-instructions]: https://aka.ms/jsconf-eu-guide-az-install
-[trigger-types]: https://aka.ms/jsconf-eu-guide-trigger-types
-[install-vs-code-reqs]: https://aka.ms/install-vs-code-reqs
 
-[use-azure]: https://azure.microsoft.com/free/?WT.mc_id=jsconfeu-github-ticyren
-[regions]: https://azure.microsoft.com/en-us/global-infrastructure/regions/?WT.mc_id=jsconfeu-github-ticyren
-
+<!-- Module Links -->
 [rvl-node-animations-npm]: https://www.npmjs.com/package/rvl-node-animations
