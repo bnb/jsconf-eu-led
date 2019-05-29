@@ -5,8 +5,10 @@ const {
 } = require('rvl-node-animations');
 
 module.exports = async function (context, req) {
-  const key = process.env.MY_API_KEY;
-  if (req.body.apiKey !== key) {
+  const secretKey = process.env.MY_API_KEY; // you can define this in tthe Azure Portal for your deployment once it's in the Cloud.
+  const incomingKey = req.body ? req.body.apiKey : undefined
+
+  if (incomingKey !== secretKey) {
     context.log('Invalid API key');
     context.res = {
       status: 400,
@@ -19,7 +21,6 @@ module.exports = async function (context, req) {
     waveParameters: createWaveParameters(
       // Create a moving wave
       createMovingWave(180, 255, 8, 1),
-
 
       // Create a fully opaque, slow color cycle that will show throw the cyan wave
       createColorCycleWave(2, 255)
