@@ -87,7 +87,7 @@ In VS Code, you have two options for local Function development:
 
 Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
 
-## Deploying to the Cloud ☁️
+### Deploying to the Cloud ☁️
 
 #### Building Infrastructure and Deploying from the CLI
 
@@ -122,9 +122,50 @@ From there we're going to run a suite of commands to build out our cloud infrast
 
 #### Building Infrastructure and Deploying from VS Code
 
-With this directory open, you're going to want to start the function (Run `func start` in your terminal or press`F5`
+To deploy to Azure, you're going to want to open up the Azure sidebar and then click the up arrow with a bar over it to upload your function:
 
-## Submitting your Functions
+![Showing the steps (1: Click Azure logo top open Azure sidebar, 2: click blue arrow pointing up with a line oover it) to deploy an Azure Function](img/upload-azure-funciton.png)
+
+Once you click this, the Extension will walk you through a series of steps to build out your infrastructure and ship your functions.
+
+Here's a quick walkthrough for first-time deployments:
+
+1. **Select the folder to deploy:** This should be the top-level folder that contains a `host.json` and has your Functions as sub-directories. In our case, this will very likely be `jsconf-eu-led` unless you're a git wizard or renamed your project directory after you cloned it.
+2. **Select a subscription:** this is the Azure subscription you're going to be deploying your Functions to.
+3. **Select a Functions App in Azure:** Choose which Functions app you're going to deploy the folder to. In our case, we're deploying for the first time and are going to want to click "Create New Function App in Azure".
+4. **Create New Function App In Azure:**
+    1. Enter a unique name (as in, one that nobody else on Azure has used before) for your Function App.
+    2. Select the runtime to use. In our case, we're going to use JavaScript.
+5. **Upload:** Once you finish step 4, this will begin automatically.
+
+If you'd like to watch a short video on taking these steps, check out the [first-time deployment video in this repo](img/deploy-azure-functions-new-app.mp4).
+
+Additionally, here's a quick walkthrough for subsequent deployments:
+
+1. **Select the folder to deploy:** This should be the top-level folder that contains a `host.json` and has your Functions as sub-directories. In our case, this will very likely be `jsconf-eu-led` unless you're a git wizard or renamed your project directory after you cloned it.
+2. **Select a subscription:** this is the Azure subscription you're going to be deploying your Functions to.
+3. **Select a Functions App in Azure:** Choose which Functions app you're going to deploy the folder to. In our case, we're going to select the Functions App we deployed to previously.
+4. **Upload:** Once you finish step 4, this will begin automatically.
+
+If you'd like to watch a short video on taking these steps, check out the [existing deployment video in this repo](img/deploy-azure-functions-existing-app.mp4).
+
+## Previewing and Submitting your Functions
+
+Once you've built out your visualzation, you should submit it and have it be visualized with the in-person LED setup we've got!
+
+To **preview your Function** before submitting it:
+
+- Navigate to the [simulator](https://brhughledstorage.z6.web.core.windows.net/simulator.html).
+- Get the URL of your Function.
+  - This will be `<your function app>.azurewebsites.net/api/<your function name>`, where `<your function app>` is the name of the Functions App you deployed and `<your function name>` is the name of the directory of the function you're calling. In the case of this repo, `<your function name>` would be `LEDTrigger`.
+  - You can also get the URL directly from the Azure Functions extension for VS Code, by opening up the subscription you deployed to, selecting the function you deployed, opening the "Functions" drop down, right clicking the name of the function you want to get the URL for, and clicking "Copy Function Url".
+- Paste the URL of the function into the simulator.
+  - If you've defined an API key as an environment variable or hard coded it into your function, also enter that!
+- Click "Run"!
+
+To **submit your Function**:
+
+
 
 ## Credits
 
