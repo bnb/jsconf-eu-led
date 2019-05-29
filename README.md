@@ -171,7 +171,6 @@ To **submit your Function**:
 
 - Bryan Hughes ([Twitter][nebrius-twitter], [GitHub][nebrius-github]) put a tremendous amount of time and effort into making this project a success. Without his work, this entire project would not exist. If you like it, you should take a moment to thank him 💜
 - Jan Schenk ([Twitter][jansche-twitter], [GitHub][jansche-github]) was an awesome help inside of Germany, working on setting up and configuring the IoT rig to work as expected once Bryan Hughes had sent it over.
-- Suz Hinton ([Twitter][noopkat-twitter], [GitHub][noopkat-github]) for working to support the team on the IoT project remotely in every way she could.
 - Tierney Cyren ([Twitter][bnb-twitter], [GitHub][bnb-github]) for working on the content within this repository.
 
 [creating-and-deploying-azure-functions]: #creating-and-deploying-azure-functions
