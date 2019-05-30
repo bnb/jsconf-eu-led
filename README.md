@@ -31,13 +31,13 @@ Since this project relies on Azure, you'll need an Azure account. If you don't a
 
 Additionally, we're going to be working from a directory that I recommend you create now: `jsconf-eu-led`. Most, if not all, work we do will be within this directory. Of course this isn't a requirement for all functions, but for the purpose of this guide it makes sense 😇
 
-## Auzre Functions In This Repository
+## Azure Functions In This Repository
 
 This repository contains a starter function that will work with the in-person demo that we'll have at JSConf EU. With some customization from you, you should be able to get you own color visualization up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
 
 Let's quickly dig into what's contained within this repo:
 
-- `./LEDTrigger/` is a directory that contains all the setup needed for an Auzre Function, mostly contained within `function.json`, and JavaScript that we want to run as a part of our Function.
+- `./LEDTrigger/` is a directory that contains all the setup needed for an Azure Function, mostly contained within `function.json`, and JavaScript that we want to run as a part of our Function.
 - `host.json` is a simple config file that tells Azure Functions how to configure itself.
 - `package.json` is our JavaScript manifest that provides some details about our app to Azure Functions and exposes dependencies to npm as requirements for the project.
 
