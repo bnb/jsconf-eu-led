@@ -27,7 +27,7 @@ Here are various the key things you'll want to know about if you're interested i
 
 ## Global Prerequisites
 
-Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here][use-azure]. With a free account, you get 1,000,000 Azure Functions executions per month.
+Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here][use-azure]. With a free account, you get 1,000,000 Azure Functions executions per month. We have a limited number of Azure Passes available at our booth which gives you free credit.
 
 Additionally, we're going to be working from this repository as a starting point, so let's clone it now with `git clone https://github.com/bnb/jsconf-eu-led.git`. We'll be doing most, if not all, of our work in the `jsconf-eu-led` folder we just cloned.
 
@@ -205,7 +205,7 @@ Once you've built out your animation, you should submit it and have it be visual
 
 We have created a simulator to help you debug your functions before submitting it to the real thing.
 
-- Navigate to the [simulator](https://aka.ms/jsconfeu/led-simulator).
+- Navigate to the [simulator][simulator].
 - Get the URL of your Function.
   - This will be `<your function app>.azurewebsites.net/api/<your function name>`, where `<your function app>` is the name of the Functions App you deployed and `<your function name>` is the name of the directory of the function you're calling. In the case of this repo, `<your function name>` would be `LEDTrigger`.
   - You can also get the URL directly from the Azure Functions extension for VS Code, by opening up the subscription you deployed to, selecting the function you deployed, opening the "Functions" drop down, right clicking the name of the function you want to get the URL for, and clicking "Copy Function Url".
@@ -259,5 +259,6 @@ Ready to run your animation on the actual LED art piece? Here's how:
 [uuid-npm]: https://www.npmjs.com/package/uuid
 
 <!-- Miscellaneous Links -->
-[led-landing-page]: https:/aka.ms/jsconfeu/led
+[led-landing-page]: https://aka.ms/jsconfeu/led
+[simulator]: https://aka.ms/jsconfeu/led-simulator
 [tanya-key-vault]: https://www.youtube.com/watch?v=-RkldpfPd9o
