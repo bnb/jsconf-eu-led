@@ -10,7 +10,7 @@ In this guide, we're going to go over the various parts you'll need to know (and
 
 ## Overview
 
-At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art piece](led-landing-page) that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
+At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art piece][led-landing-page] that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
 
 Attendees can submit their own light patterns that will be queued up and run on the LED art piece. We welcome and encourage creative submissions, and are very much looking forward to seeing what you'll be able to do with the LED art piece.
 
@@ -27,7 +27,7 @@ Here are various the key things you'll want to know about if you're interested i
 
 ## Global Prerequisites
 
-Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here](use-azure). With a free account, you get 1,000,000 Azure Functions executions per month.
+Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here][use-azure]. With a free account, you get 1,000,000 Azure Functions executions per month.
 
 Additionally, we're going to be working from this repository as a starting point, so let's clone it now with `git clone https://github.com/bnb/jsconf-eu-led.git`. We'll be doing most, if not all, of our work in the `jsconf-eu-led` folder we just cloned.
 
@@ -53,13 +53,13 @@ The response from your function is also in JSON, and should have its `content-ty
 }
 ```
 
-You can generate waveParameters by hand, but be warned that they consist of 82 8-bit integers. We recommend you use the [rvl-node-animations package](rvl-node-animations-npm) to generate them instead.
+You can generate waveParameters by hand, but be warned that they consist of 82 8-bit integers. We recommend you use the [rvl-node-animations package][rvl-node-animations-npm] to generate them instead.
 
 ### About API Keys
 
-API Keys are optional, but it's good security to get in the habit of using them. The purpose of these keys is so that _you_ can verify that the person calling your Function is indeed us, and not someone else. You submit an API key through the submission page, or have one generated for you. Generated keys are version 4 UUIDs, which are generated using the [uuid npm package](uuid-npm), but can be of any format you prefer. If you prefer not to use API keys, then ignore this field in code and the web submission clients.
+API Keys are optional, but it's good security to get in the habit of using them. The purpose of these keys is so that _you_ can verify that the person calling your Function is indeed us, and not someone else. You submit an API key through the submission page, or have one generated for you. Generated keys are version 4 UUIDs, which are generated using the [uuid npm package][uuid-npm], but can be of any format you prefer. If you prefer not to use API keys, then ignore this field in code and the web submission clients.
 
-The API Key should _never_ be stored in your source code directly, as this makes it easy to accidentally leak the key. Instead, the key should be stored in an environment variable called `API_KEY` and accessed in your Function code via `process.env.API_KEY`. You can store the key to an environment in Azure Functions in one of two ways: 1) as an [application setting](application-settings) or 2) using Azure Key Vault. Azure Key Vault is the proper way to store any type of secret that you need to read in a secure manner. For more information on Azure Key Vault, check out [Tanya Janca's talk on it](tanya-key-vault) and the [Azure Key Vault documentation](key-vault). Storing API Keys using application settings isn't very secure, however using Azure Key Vault is Yet One More Thing to Learn, so it's your call.
+The API Key should _never_ be stored in your source code directly, as this makes it easy to accidentally leak the key. Instead, the key should be stored in an environment variable called `API_KEY` and accessed in your Function code via `process.env.API_KEY`. You can store the key to an environment in Azure Functions in one of two ways: 1) as an [application setting][application-settings] or 2) using Azure Key Vault. Azure Key Vault is the proper way to store any type of secret that you need to read in a secure manner. For more information on Azure Key Vault, check out [Tanya Janca's talk on it][tanya-key-vault] and the [Azure Key Vault documentation][key-vault]. Storing API Keys using application settings isn't very secure, however using Azure Key Vault is Yet One More Thing to Learn, so it's your call.
 
 ## Azure Functions In This Repository
 
@@ -85,8 +85,8 @@ From there, you're going to want to run your functions to test them and then dep
 
 #### Working from the CLI
 
-- You can find install instructions for `func` [here](func-install-instructions), also known as azure-functions-core-tools.
-- You can find install instructions for `az` [here](az-install-instructions).
+- You can find install instructions for `func` [here][func-install-instructions], also known as azure-functions-core-tools.
+- You can find install instructions for `az` [here][az-install-instructions].
 
 Be sure to install both of these dependencies, as we'll be using them later.
 
@@ -205,7 +205,7 @@ Once you've built out your animation, you should submit it and have it be visual
 
 We have created a simulator to help you debug your functions before submitting it to the real thing.
 
-- Navigate to the [simulator](https://brhughledstorage.z6.web.core.windows.net/simulator.html).
+- Navigate to the [simulator](https://aka.ms/jsconfeu/led-simulator).
 - Get the URL of your Function.
   - This will be `<your function app>.azurewebsites.net/api/<your function name>`, where `<your function app>` is the name of the Functions App you deployed and `<your function name>` is the name of the directory of the function you're calling. In the case of this repo, `<your function name>` would be `LEDTrigger`.
   - You can also get the URL directly from the Azure Functions extension for VS Code, by opening up the subscription you deployed to, selecting the function you deployed, opening the "Functions" drop down, right clicking the name of the function you want to get the URL for, and clicking "Copy Function Url".
