@@ -1,8 +1,8 @@
 # Microsoft @ JSConf EU: LED Guide
 
-At the Microsoft Booth this year, we're doing something extra special: an attendee-controlled LED art object.
+At the Microsoft Booth this year, we're doing something extra special: an attendee-controlled LED art piece.
 
-In this guide, we're going to go over the various parts you'll need to know (and extras you may _want_ to know) to control the LED art object yourself!
+In this guide, we're going to go over the various parts you'll need to know (and extras you may _want_ to know) to control the LED art piece yourself!
 
 ## Table of Contents
 
@@ -10,9 +10,9 @@ In this guide, we're going to go over the various parts you'll need to know (and
 
 ## Overview
 
-At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art object](led-landing-page) that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
+At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art piece](led-landing-page) that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
 
-Attendees can submit their own light patterns that will be queued up and run on the LED art object. We welcome and encourage creative submissions, and are very much looking forward to seeing what you'll be able to do with the LED art object.
+Attendees can submit their own light patterns that will be queued up and run on the LED art piece. We welcome and encourage creative submissions, and are very much looking forward to seeing what you'll be able to do with the LED art piece.
 
 Here are various the key things you'll want to know about if you're interested in submitting your own LED animations:
 
@@ -20,10 +20,10 @@ Here are various the key things you'll want to know about if you're interested i
   - The Functions as a Service (a.k.a. Serverless) tool available from Azure
   - Check out [Creating and Deploying Azure Functions][creating-and-deploying-azure-functions] for more information on getting started!
 - [rvl-node-animations][rvl-node-animations-npm]
-  - The module by [Bryan Hughes][nebrius-twitter] that makes creating animations for the LED art object significantly more simple than hardcoding 80 sin wave coefficients.
+  - The module by [Bryan Hughes][nebrius-twitter] that makes creating animations for the LED art piece significantly more simple than hardcoding 80 sin wave coefficients.
   - Can be installed via `npm i rvl-node-animations`.
 - [Submissions][submit-and-queue]
-  - The page where you can submit your Azure Functions for the LED art object
+  - The page where you can submit your Azure Functions for the LED art piece
 
 ## Global Prerequisites
 
@@ -31,9 +31,39 @@ Since this project relies on Azure, you'll need an Azure account. If you don't a
 
 Additionally, we're going to be working from this repository as a starting point, so let's clone it now with `git clone https://github.com/bnb/jsconf-eu-led.git`. We'll be doing most, if not all, of our work in the `jsconf-eu-led` folder we just cloned.
 
+## Specifications
+
+Custom animations are an HTTP-triggered Function that are called from the LED art piece infrastructure, which is also written using Azure Functions.
+
+The request made to your Function is an HTTPS POST request with a small JSON payload (a.k.a. the `content-type` is set to `application/json`). The JSON payload with the following shape:
+
+```json
+{
+  "apiKey": "api key as a string"
+}
+```
+
+The response from your function is also in JSON, and should have its `content-type` set to `application/json` as well. The response has the following shape:
+
+```json
+{
+  "waveParameters": {
+    ...wave parameters here
+  }
+}
+```
+
+You can generate waveParameters by hand, but be warned that they consist of 82 8-bit integers. We recommend you use the [rvl-node-animations package](rvl-node-animations-npm) to generate them instead.
+
+### About API Keys
+
+API Keys are optional, but it's good security to get in the habit of using them. The purpose of these keys is so that _you_ can verify that the person calling your Function is indeed us, and not someone else. You submit an API key through the submission page, or have one generated for you. Generated keys are version 4 UUIDs, which are generated using the [uuid npm package](uuid-npm), but can be of any format you prefer. If you prefer not to use API keys, then ignore this field in code and the web submission clients.
+
+The API Key should _never_ be stored in your source code directly, as this makes it easy to accidentally leak the key. Instead, the key should be stored in an environment variable called `API_KEY` and accessed in your Function code via `process.env.API_KEY`. You can store the key to an environment in Azure Functions in one of two ways: 1) as an [application setting](application-settings) or 2) using Azure Key Vault. Azure Key Vault is the proper way to store any type of secret that you need to read in a secure manner. For more information on Azure Key Vault, check out [Tanya Janca's talk on it](tanya-key-vault) and the [Azure Key Vault documentation](key-vault). Storing API Keys using application settings isn't very secure, however using Azure Key Vault is Yet One More Thing to Learn, so it's your call.
+
 ## Azure Functions In This Repository
 
-This repository contains a starter function that will work out-of-the-box with the LED art object at JSConf EU. With some configuration from you, you should be able to get you own animation up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
+This repository contains a starter function that will work out-of-the-box with the LED art piece at JSConf EU. With some configuration from you, you should be able to get you own animation up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
 
 Let's quickly dig into what's contained within this repo:
 
@@ -72,7 +102,7 @@ Once you've got the CLI and extensions installed, you'll need to sign in to Azur
 
 Additionally, you can open up the Azure Functions sidebar and click "Sign in to Azure..." to sign in. To get the sidebar to appear you may need to restart VS Code.
 
-### Developing Your LED Patterns with Azure Functions Locally
+### Developing Your LED Animations with Azure Functions Locally
 
 #### Local Development from the CLI
 
@@ -187,7 +217,7 @@ We have created a simulator to help you debug your functions before submitting i
 
 ### Submit Your Functions
 
-Ready to run your animation on the actual LED art object? Here's how:
+Ready to run your animation on the actual LED art piece? Here's how:
 
 - Head over to the [submission][submit-and-queue] site.
 - Put the URL of your Azure Function in the `Azure Function Endpoint` field.
@@ -213,6 +243,8 @@ Ready to run your animation on the actual LED art object? Here's how:
 [install-vs-code-reqs]: https://aka.ms/jsconfeu/install-vs-code-reqs
 [use-azure]: https://aka.ms/jsconfeu/free
 [regions]: https://aka.ms/jsconfeu/regions
+[application-settings]: https://aka.ms/jsconfeu/app-settings
+[key-vault]: https://aka.ms/jsconfeu/key-vault
 
 <!-- Social links in Credits and elsewhere -->
 [nebrius-twitter]: https://twitter.com/nebrius
@@ -224,6 +256,8 @@ Ready to run your animation on the actual LED art object? Here's how:
 
 <!-- Module Links -->
 [rvl-node-animations-npm]: https://www.npmjs.com/package/rvl-node-animations
+[uuid-npm]: https://www.npmjs.com/package/uuid
 
 <!-- Miscellaneous Links -->
 [led-landing-page]: https:/aka.ms/jsconfeu/led
+[tanya-key-vault]: https://www.youtube.com/watch?v=-RkldpfPd9o
