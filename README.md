@@ -4,10 +4,6 @@ At the Microsoft Booth this year, we're doing something extra special: an attend
 
 In this guide, we're going to go over the various parts you'll need to know (and extras you may _want_ to know) to control the LED art piece yourself!
 
-## Table of Contents
-
-- TBD
-
 ## Overview
 
 At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art piece][led-landing-page] that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
@@ -27,7 +23,7 @@ Here are various the key things you'll want to know about if you're interested i
 
 ## Global Prerequisites
 
-Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here][use-azure]. With a free account, you get 1,000,000 Azure Functions executions per month. We have a limited number of Azure Passes available at our booth which gives you free credit.
+Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here][use-azure]. With a free account, you get 1,000,000 Azure Functions executions per month. We also have a limited number of Azure Passes available at our booth which gives you free credit.
 
 Additionally, we're going to be working from this repository as a starting point, so let's clone it now with `git clone https://github.com/bnb/jsconf-eu-led.git`. We'll be doing most, if not all, of our work in the `jsconf-eu-led` folder we just cloned.
 
