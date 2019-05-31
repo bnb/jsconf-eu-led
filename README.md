@@ -1,8 +1,8 @@
 # Microsoft @ JSConf EU: LED Guide
 
-At the Microsoft Booth this year, we're doing something extra special: an attendee-controlled LED build.
+At the Microsoft Booth this year, we're doing something extra special: an attendee-controlled LED art object.
 
-In this guide, we're going to go over the various parts you'll need to know (and extras you may _want_ to know) to control the LED build yourself!
+In this guide, we're going to go over the various parts you'll need to know (and extras you may _want_ to know) to control the LED art object yourself!
 
 ## Table of Contents
 
@@ -10,30 +10,30 @@ In this guide, we're going to go over the various parts you'll need to know (and
 
 ## Overview
 
-At the Microsoft booth, we'll have a rather unique setup: a programmable LED build that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
+At the Microsoft booth, we'll have a rather unique setup: [a programmable LED art object](led-landing-page) that is controlled entirely by input received from JavaScript via [Azure Functions][azure-functions-docs].
 
-Attendees can submit their own light patterns that will be queued up and run on the LED build. We welcome and encourage creative submissions, and are very much looking forward to seeing what you'll be able to do with the LED build.
+Attendees can submit their own light patterns that will be queued up and run on the LED art object. We welcome and encourage creative submissions, and are very much looking forward to seeing what you'll be able to do with the LED art object.
 
-Here are various the key things you'll want to know about if you're interested in submitting your own LED builds:
+Here are various the key things you'll want to know about if you're interested in submitting your own LED animations:
 
 - Azure Functions
   - The Functions as a Service (a.k.a. Serverless) tool available from Azure
   - Check out [Creating and Deploying Azure Functions][creating-and-deploying-azure-functions] for more information on getting started!
 - [rvl-node-animations][rvl-node-animations-npm]
-  - The module by [Bryan Hughes][nebrius-twitter] that makes the interface for controlling lights in the LED build significantly more simple than hardcoding LED patterns.
+  - The module by [Bryan Hughes][nebrius-twitter] that makes creating animations for the LED art object significantly more simple than hardcoding 80 sin wave coefficients.
   - Can be installed via `npm i rvl-node-animations`.
 - [Submissions][submit-and-queue]
-  - The page where you can submit your Azure Functions for the LED Build
+  - The page where you can submit your Azure Functions for the LED art object
 
 ## Global Prerequisites
 
 Since this project relies on Azure, you'll need an Azure account. If you don't already have an Azure account, you can sign up for a free one [here](use-azure). With a free account, you get 1,000,000 Azure Functions executions per month.
 
-Additionally, we're going to be working from a directory that I recommend you create now: `jsconf-eu-led`. Most, if not all, work we do will be within this directory. Of course this isn't a requirement for all functions, but for the purpose of this guide it makes sense 😇
+Additionally, we're going to be working from this repository as a starting point, so let's clone it now with `git clone https://github.com/bnb/jsconf-eu-led.git`. We'll be doing most, if not all, of our work in the `jsconf-eu-led` folder we just cloned.
 
 ## Azure Functions In This Repository
 
-This repository contains a starter function that will work with the in-person demo that we'll have at JSConf EU. With some customization from you, you should be able to get you own color visualization up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
+This repository contains a starter function that will work out-of-the-box with the LED art object at JSConf EU. With some configuration from you, you should be able to get you own animation up and running while at the conference by simply cloning this repo, making your tweaks, and shipping them to Azure.
 
 Let's quickly dig into what's contained within this repo:
 
@@ -58,9 +58,11 @@ From there, you're going to want to run your functions to test them and then dep
 - You can find install instructions for `func` [here](func-install-instructions), also known as azure-functions-core-tools.
 - You can find install instructions for `az` [here](az-install-instructions).
 
+Be sure to install both of these dependencies, as we'll be using them later.
+
 #### Working from VS Code
 
-For development in VS Code, you'll want both the Azure Functions Core Tools CLI, and the Azure Functions extension for VS Code. You can find instructions on how to get both set up for your environment, there's an excellent in the the [VS Code docs][install-vs-code-reqs].
+For development in VS Code, you'll want the Azure Functions extension for VS Code in addition to the tools we installed above. You can find instructions on how to get both set up for your environment in the the [VS Code docs][install-vs-code-reqs].
 
 > If you have any questions about or issues with the getting the VS Code tools set up, feel free to ask anyone staffing the Microsoft booth – we'd be happy to help ✨
 
@@ -78,6 +80,14 @@ The `func start` command is available to you, allowing you to run your functions
 
 Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
 
+If you would like to use Postman or similar tool to debug locally, be aware that the HttpTrigger we just created is listening for a POST request, a `Content-Type` of `application/json`, and with the following POST body:
+
+```
+{
+    apiKey: 'api_key_here'
+}
+```
+
 #### Local Development from VS Code
 
 In VS Code, you have two options for local Function development:
@@ -86,6 +96,14 @@ In VS Code, you have two options for local Function development:
 - Pressing the `F5` key inside of VS Code automatically runs your functions, since you have the Azure Functions extension.
 
 Since we're working with HTTTP Trigger functions, you'll be provided a URL that they can be accessed from - you can check what they return at this URL.
+
+If you would like to use Postman or similar tool to debug locally, be aware that the HttpTrigger we just created is listening for a POST request, a `Content-Type` of `application/json`, and with the following POST body:
+
+```
+{
+    apiKey: 'api_key_here'
+}
+```
 
 ### Deploying to the Cloud ☁️
 
@@ -124,7 +142,7 @@ From there we're going to run a suite of commands to build out our cloud infrast
 
 To deploy to Azure, you're going to want to open up the Azure sidebar and then click the up arrow with a bar over it to upload your function:
 
-![Showing the steps (1: Click Azure logo top open Azure sidebar, 2: click blue arrow pointing up with a line oover it) to deploy an Azure Function](img/upload-azure-funciton.png)
+![Showing the steps (1: Click Azure logo top open Azure sidebar, 2: click blue arrow pointing up with a line over it) to deploy an Azure Function](img/upload-azure-funciton.png)
 
 Once you click this, the Extension will walk you through a series of steps to build out your infrastructure and ship your functions.
 
@@ -151,9 +169,11 @@ If you'd like to watch a short video on taking these steps, check out the [exist
 
 ## Previewing and Submitting your Functions
 
-Once you've built out your visualzation, you should submit it and have it be visualized with the in-person LED setup we've got!
+Once you've built out your animation, you should submit it and have it be visualized with the in-person LED setup we've got!
 
 ### Preview Your Functions
+
+We have created a simulator to help you debug your functions before submitting it to the real thing.
 
 - Navigate to the [simulator](https://brhughledstorage.z6.web.core.windows.net/simulator.html).
 - Get the URL of your Function.
@@ -163,14 +183,20 @@ Once you've built out your visualzation, you should submit it and have it be vis
   - If you've defined an API key as an environment variable or hard coded it into your function, also enter that!
 - Click "Run"!
 
+ Note: Function URLs that don't start with `<your function app>.azurewebsites.net` are rejected by the server. This does mean you cannot use a custom domain with your Function.
+
 ### Submit Your Functions
+
+Ready to run your animation on the actual LED art object? Here's how:
 
 - Head over to the [submission][submit-and-queue] site.
 - Put the URL of your Azure Function in the `Azure Function Endpoint` field.
 - Put your API key in the `API Key`, if you've set one up.
 - Put the name you want to be identified as in the queue in the `Display Name` field.
 - Submit!
-  - Your entry will be queued up and run. Once run, all the information you entered into the three fields is dropped from the queue and not stored/retained in any other way.
+  - Your entry will be queued up and run. Once run, all the information you entered into the three fields is dropped from the queue and not stored/retained in any other way.*
+
+*We do collect anonymized statistics on submissions. We store three fields: 1) the HTTP status code returned by the simulator, 2) the time of the submission, 3) and the type of submission (to the simulator, to the real thing, or from a tablet at the booth to the real thing). This anonymized data will be deleted at most 1 week after the event.
 
 ## Credits
 
@@ -198,3 +224,6 @@ Once you've built out your visualzation, you should submit it and have it be vis
 
 <!-- Module Links -->
 [rvl-node-animations-npm]: https://www.npmjs.com/package/rvl-node-animations
+
+<!-- Miscellaneous Links -->
+[led-landing-page]: https:/aka.ms/jsconfeu/led
